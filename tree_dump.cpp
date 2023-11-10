@@ -18,7 +18,7 @@ void tree_visualize(tree_graph * tree) {
     fprintf(pfile, "\tnode[color=\"black\",fontsize=14];\n");
     fprintf(pfile, "\tedge[color=\"darkgreen\",fontcolor=\"blue\",fontsize=12,  width=0.4];\n\n\n");
 
-    fprintf(pfile, "\t50 [shape=note,style=filled, fillcolor=\"#fdf39b\", label=\"SIZE: %d\", fontcolor = \"black\", fontsize = 20];\n", tree->size);
+    fprintf(pfile, "\t99999 [shape=note,style=filled, fillcolor=\"#fdf39b\", label=\"SIZE: %d\", fontcolor = \"black\", fontsize = 20];\n", tree->size);
 
     print_grapf_node(tree->root_element, pfile, 1);
 
@@ -46,7 +46,7 @@ void create_new_graph(void) {  // TODO: temporary files, hardcode of path
 
 static void print_graph_arrows(tree_element * element, FILE * pfile) {
     if (element->left != NULL) {
-        fprintf(pfile, "\t%d->%d [color = \"orange\"];\n", *(int *) element, *(int *) element->left);
+        fprintf(pfile, "\t%d->%d [color = \"#22f230\"];\n", *(int *) element, *(int *) element->left);
         print_graph_arrows(element->left, pfile);
     }
 

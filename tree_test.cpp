@@ -39,6 +39,9 @@ int main(void) {
     tree_add_descendant(&(tree.root_element->right->right), 50);
     distribute_number(&tree.root_element, 35);
     //read_data(&tree);
+    distribute_number(&tree.root_element, 55);
+    distribute_number(&tree.root_element, 12);
+    distribute_number(&tree.root_element, 25);
 
     tree_print_preorder(tree.root_element);
     tree_visualize(&tree);
