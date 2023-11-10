@@ -1,3 +1,7 @@
 .DS_Store
 tree
 .vscode
+*.o
+graph.dot
+tree.DSYM
+graphs
