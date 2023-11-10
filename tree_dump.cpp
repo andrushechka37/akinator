@@ -5,7 +5,7 @@
 
 
 
-static void print_grapf_node(tree_element * element, FILE * pfile);
+static void print_grapf_node(tree_element * element, FILE * pfile, int rank);
 static void print_graph_arrows(tree_element * element, FILE * pfile);
 
 
@@ -16,11 +16,11 @@ void tree_visualize(tree_graph * tree) {
     fprintf(pfile, "\trankdir=HR;\n");
     fprintf(pfile, "\tgraph [bgcolor=\"#31353b\"]\n");
     fprintf(pfile, "\tnode[color=\"black\",fontsize=14];\n");
-    fprintf(pfile, "\tedge[color=\"darkgreen\",fontcolor=\"blue\",fontsize=12];\n\n\n");
+    fprintf(pfile, "\tedge[color=\"darkgreen\",fontcolor=\"blue\",fontsize=12,  width=0.4];\n\n\n");
 
     fprintf(pfile, "\t50 [shape=note,style=filled, fillcolor=\"#fdf39b\", label=\"SIZE: %d\", fontcolor = \"black\", fontsize = 20];\n", tree->size);
 
-    print_grapf_node(tree->root_element, pfile);
+    print_grapf_node(tree->root_element, pfile, 1);
 
     fprintf(pfile, "\n\n\n\n");
     
@@ -45,35 +45,27 @@ void create_new_graph(void) {  // TODO: temporary files, hardcode of path
 
 
 static void print_graph_arrows(tree_element * element, FILE * pfile) {
-    if (element->left == NULL) {
-        return;
-    } else {
+    if (element->left != NULL) {
         fprintf(pfile, "\t%d->%d [color = \"orange\"];\n", *(int *) element, *(int *) element->left);
         print_graph_arrows(element->left, pfile);
     }
 
-    if (element->right == NULL) {
-        return;
-    } else {
+    if (element->right != NULL) {
         fprintf(pfile, "\t%d->%d [color = \"orange\"];\n", *(int *) element, *(int *) element->right);
         print_graph_arrows(element->right, pfile);
     }
     return;
 }
 
-static void print_grapf_node(tree_element * element, FILE * pfile) {
-    fprintf(pfile, "\t%d[shape=Mrecord,style=filled, fillcolor=\"#7293ba\", label=\" {ADDRESS: %p | DATA: %d | LEFT: %p | RIGHT: %p}\"];\n", 
-                                              *(int *)element, element, element->data, element->left, element->right);
-    if (element->left == NULL) {
-        return;
-    } else {
-        print_grapf_node(element->left, pfile);
+static void print_grapf_node(tree_element * element, FILE * pfile, int rank) {
+    fprintf(pfile, "\t%d[shape=Mrecord,style=filled, fillcolor=\"#7293ba\", rank = %d, label=\" {ADDRESS: %p | DATA: %d | LEFT: %p | RIGHT: %p}\"];\n", 
+                                              *(int *)element, rank, element, element->data, element->left, element->right);
+    if (element->left != NULL) {
+        print_grapf_node(element->left, pfile, ++rank);
     }
 
-    if (element->right == NULL) {
-        return;
-    } else {
-        print_grapf_node(element->right, pfile);
+    if (element->right != NULL) {
+        print_grapf_node(element->right, pfile, ++rank);
     }
     return;
 }
