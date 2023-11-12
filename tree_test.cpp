@@ -6,30 +6,10 @@
 #include <string.h>
 
 // (later) verificator get size not to be endless recursion
-// 2 dtors recursion
-// insert 12
-// (later) check of brackets
 // save or not before exit
 
 
 
-void distribute_number(tree_element ** node, int value) {
-    if (value <= (*node)->data && (*node)->data != 0) {
-        if ((*node)->left != 0) {
-            distribute_number(&((*node)->left), value);
-        } else {
-            tree_add_descendant(&((*node)->left), value);
-            return;
-        }
-    } else {
-        if ((*node)->right != 0) {
-            distribute_number(&((*node)->right), value);
-        } else {
-            tree_add_descendant(&((*node)->right), value);
-            return;
-        }
-    }
-}
 
 int main(void) {
     tree_graph tree = {};
@@ -37,17 +17,18 @@ int main(void) {
     tree_add_descendant(&tree.root_element->left, 20);
     tree_add_descendant(&tree.root_element->right, 30);
     tree_add_descendant(&(tree.root_element->right->right), 50);
-    distribute_number(&tree.root_element, 35);
     //read_data(&tree);
-    distribute_number(&tree.root_element, 55);
-    distribute_number(&tree.root_element, 12);
-    distribute_number(&tree.root_element, 25);
+    // distribute_number(&tree.root_element, 55);
+    // distribute_number(&tree.root_element, 12);
+    // distribute_number(&tree.root_element, 25);
+    // distribute_number(&tree.root_element, 34);
+    // distribute_number(&tree.root_element, 76);
+    // distribute_number(&tree.root_element, 24);
+    // distribute_number(&tree.root_element, 90);
 
     tree_print_preorder(tree.root_element);
     tree_visualize(&tree);
+    tree_graph_dtor(&tree.root_element);
 }
-
-
-
 
 
