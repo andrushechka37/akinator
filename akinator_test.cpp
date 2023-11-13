@@ -8,24 +8,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-// adding elements
-// comparising
-// save data in multiple strings in file WOW DONE!
 
+// guess done without adding elements
+
+// comparison
 
 int main(void) {
     akinator_tree tree = {};
     akinator_ctor(&tree);
-    // akinator_add_descendant(&tree.root->left, "kishka", sizeof("one"));
-    // akinator_add_descendant(&tree.root->left->left, "analgetiki", sizeof("one"));
-    // akinator_add_descendant(&tree.root->left->left, "stress", sizeof("one"));
-    // akinator_add_descendant(&tree.root->left->left->right, "utrom", sizeof("one"));
-    // akinator_add_descendant(&tree.root->right, "rvota", sizeof("two"));
-    // akinator_add_descendant(&tree.root->right->right, "berem", sizeof("three"));
-    // akinator_add_descendant(&tree.root->right->right->left, "vrach", sizeof("four"));
 
     read_data_akinator(&tree);
-    //akinator_characterize_print(tree.root, "q5");
+    akinator_characterize_print(tree.root, "мышь");
 
 
     

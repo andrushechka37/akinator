@@ -4,14 +4,24 @@
 
 #include "akinator.h"
 
-
+void print_single_sign(akinator_element* elem, stack * stk, int number) {
+    if (elem->left == NULL && elem->right == NULL) {
+        return;
+    }
+    if (stk->data[number] == 1) {
+        printf("%s", elem->text);
+        print_single_sign(elem->left, stk, ++number);
+    } else {
+        printf(" НЕ %s", elem->text);
+        print_single_sign(elem->right, stk, ++number);
+    }
+    return;
+}
 int akinator_characterize_print(akinator_element* elem, char * search_text) {
     stack stk = {};
     Stack_Ctor(&stk);
     akinator_characterize_node(elem, search_text, &stk);
-    for (int i = 0; i < stk.size; i++) {      // instead of that print function
-        printf("%d\n", stk.data[i]);
-    }
+    print_single_sign(elem, &stk, 0);
 }
 int akinator_characterize_node(akinator_element* elem, char * search_text, stack * stk) {
     if (elem->left == NULL && elem->right == NULL) {      
@@ -75,21 +85,21 @@ int akinator_ctor(akinator_tree * tree) {
 int read_node_akinator(akinator_element ** node, FILE * pfile, char * text, int size) {
     akinator_add_descendant(node, text, size);
     char check_char = '0';
-    check_simbol('>');
+    check_symbol('>');
     if (fscanf(pfile, "(<%[^>]s", text) == 1) {
         text[strcspn(text, "\n")] = '\0';
         read_node_akinator(&((*node)->left), pfile, text, sizeof(text));
     } else {
-        check_simbol('*');
+        check_symbol('*');
     }
 
     if (fscanf(pfile, "(<%[^>]s", text) == 1) {
         text[strcspn(text, "\n")] = '\0';
         read_node_akinator(&((*node)->right), pfile, text, sizeof(text));
     } else {
-        check_simbol('*');
+        check_symbol('*');
     }
-    check_simbol(')');
+    check_symbol(')');
     return 0; 
 }
 

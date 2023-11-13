@@ -12,7 +12,7 @@ struct akinator_tree{
     int size;
 };
 
-#define check_simbol(symbol)                              \
+#define check_symbol(symbol)                              \
     fscanf(pfile, "%c", &check_char);                     \
     if (check_char != symbol) {                           \
         printf("syntax error %c\n", check_char);          \
@@ -35,3 +35,6 @@ int read_data_akinator(akinator_tree * tree);
 
 int akinator_characterize_node(akinator_element* elem, char * search_text, stack * stk);
 int akinator_characterize_print(akinator_element* elem, char * search_text);
+
+
+int graph_traversal(akinator_element* elem);
