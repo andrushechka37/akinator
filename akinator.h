@@ -1,5 +1,5 @@
 #pragma once
-
+#include "stack_func.h"
 const int text_len = 100;
 struct akinator_element{
     char text[text_len];
@@ -13,10 +13,14 @@ struct akinator_tree{
 };
 
 #define check_simbol(symbol)                              \
-    fscanf(pfile, "%c", &check_symbol);                   \
-    if (check_symbol != symbol) {                         \
-        printf("syntax error %c\n", check_symbol);        \
+    fscanf(pfile, "%c", &check_char);                     \
+    if (check_char != symbol) {                           \
+        printf("syntax error %c\n", check_char);          \
         return 0;                                         \
+    }                                                     \
+    fscanf(pfile, "%c", &check_char);                     \
+    if (check_char != '\n') {                             \
+        ungetc(check_char, pfile);                        \
     }
 
 
@@ -29,3 +33,5 @@ int akinator_add_descendant(akinator_element ** ancestor, char * text, int size)
 int read_node_akinator(akinator_element ** node, FILE * pfile, char * text, int size);
 int read_data_akinator(akinator_tree * tree);
 
+int akinator_characterize_node(akinator_element* elem, char * search_text, stack * stk);
+int akinator_characterize_print(akinator_element* elem, char * search_text);

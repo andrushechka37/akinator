@@ -26,8 +26,8 @@ CXXFLAGS =  -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-
 
 
 .PHONY: akinator
-akinator: akinator_test.o akinator_dump.o stack_func.o
-	clang++ akinator_test.o akinator_dump.o stack_func.o $(CXXFLAGS) -o akinator && ./akinator
+akinator: akinator_test.o akinator_dump.o stack_func.o akinator.o
+	clang++ akinator_test.o akinator_dump.o stack_func.o akinator.o $(CXXFLAGS) -o akinator && ./akinator
 akinator_test.o: akinator_test.cpp akinator.h akinator_dump.h
 	clang++ -c akinator_test.cpp
 akinator_dump.o: akinator_dump.cpp akinator_dump.h
@@ -35,3 +35,6 @@ akinator_dump.o: akinator_dump.cpp akinator_dump.h
 
 stack_func.o: stack_func.cpp stack_func.h
 	clang++ -c stack_func.cpp
+
+akinator.o: akinator.cpp akinator.h
+	clang++ -c akinator.cpp

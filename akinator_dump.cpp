@@ -1,9 +1,10 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "akinator_dump.h"
 
-#include <stdlib.h>  // should be deleted
-#include <string.h>
-static void print_grapf_node(akinator_element * element, FILE * pfile, int rank);
+static void print_graph_node(akinator_element * element, FILE * pfile, int rank);
 static void print_graph_arrows(akinator_element * element, FILE * pfile);
 
 static void print_graph_arrows(akinator_element * element, FILE * pfile) {
@@ -19,35 +20,35 @@ static void print_graph_arrows(akinator_element * element, FILE * pfile) {
     return;
 }
 
-static void print_grapf_node(akinator_element * element, FILE * pfile, int rank) {
+static void print_graph_node(akinator_element * element, FILE * pfile, int rank) {
     fprintf(pfile, "\t%d[shape=Mrecord,style=filled, fillcolor=\"#7293ba\", rank = %d, label=\"%s\"];\n", 
                                             element, rank, element->text);
     if (element->left != NULL) {
-        print_grapf_node(element->left, pfile, ++rank);
+        print_graph_node(element->left, pfile, ++rank);
     }
 
     if (element->right != NULL) {
-        print_grapf_node(element->right, pfile, ++rank);
+        print_graph_node(element->right, pfile, ++rank);
     }
     return;
 }
 
 
 
-int akinator_print_preorder(akinator_element * root) {       // it is like a root for a chosen child node.  am i right?
+int print_akinator_preorder(akinator_element * root) {       // it is like a root for a chosen child node.  am i right?
     if (root == NULL) {       //         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         printf("*");
         return 0;
     }
     printf("(");
     printf("<%s>", root->text);
-    akinator_print_preorder(root->left);
-    akinator_print_preorder(root->right);
+    print_akinator_preorder(root->left);
+    print_akinator_preorder(root->right);
     printf(")");
     return 0;
 }
 
-void tree_visualize(akinator_tree * tree) {
+void akinator_visualize(akinator_tree * tree) {
     FILE * pfile = fopen("graph.dot", "w");
     fprintf(pfile, "digraph structs {\n");
     fprintf(pfile, "\trankdir=HR;\n");
@@ -57,7 +58,7 @@ void tree_visualize(akinator_tree * tree) {
 
     fprintf(pfile, "\t99999 [shape=note,style=filled, fillcolor=\"#fdf39b\", label=\"SIZE: %d\", fontcolor = \"black\", fontsize = 20];\n", tree->size);
 
-    print_grapf_node(tree->root, pfile, 1);
+    print_graph_node(tree->root, pfile, 1);
 
     fprintf(pfile, "\n\n\n\n");
     

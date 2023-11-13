@@ -1,3 +1,4 @@
+#pragma once
 // TODO: If this is used for conditional compilation, than
 //       just use #ifdef and #ifndef and parametrize on 
 //       define's existance, not it's value, this way
