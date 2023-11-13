@@ -3,18 +3,17 @@
 
 #include <stdlib.h>  // should be deleted
 #include <string.h>
-
 static void print_grapf_node(akinator_element * element, FILE * pfile, int rank);
 static void print_graph_arrows(akinator_element * element, FILE * pfile);
 
 static void print_graph_arrows(akinator_element * element, FILE * pfile) {
     if (element->left != NULL) {
-        fprintf(pfile, "\t%d->%d [color = \"#22f230\"];\n", *(int *) element, *(int *) element->left);
+        fprintf(pfile, "\t%d->%d [color = \"#22f230\"];\n", element, element->left);
         print_graph_arrows(element->left, pfile);
     }
 
     if (element->right != NULL) {
-        fprintf(pfile, "\t%d->%d [color = \"orange\"];\n", *(int *) element, *(int *) element->right);
+        fprintf(pfile, "\t%d->%d [color = \"orange\"];\n", element, element->right);
         print_graph_arrows(element->right, pfile);
     }
     return;
@@ -22,7 +21,7 @@ static void print_graph_arrows(akinator_element * element, FILE * pfile) {
 
 static void print_grapf_node(akinator_element * element, FILE * pfile, int rank) {
     fprintf(pfile, "\t%d[shape=Mrecord,style=filled, fillcolor=\"#7293ba\", rank = %d, label=\"%s\"];\n", 
-                                              *(int *)element, rank, element->text);
+                                            element, rank, element->text);
     if (element->left != NULL) {
         print_grapf_node(element->left, pfile, ++rank);
     }

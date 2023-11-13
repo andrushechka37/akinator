@@ -1,5 +1,5 @@
 CXXFLAGS =  -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-loop-optimizations \
-   -Wc++14-compat -Wmissing-declarations -Wcast-align -Wcast-qual -Wchar-subscripts                \
+   -Wc++14-compat -Wmissing-declarations -Wcast-qual -Wchar-subscripts                \
    -Wconditionally-supported -Wconversion -Wctor-dtor-privacy -Wempty-body -Wfloat-equal           \
    -Wformat-nonliteral -Wformat-security -Wformat-signedness -Wformat=2 -Winline                   \
    -Wlogical-op -Wnon-virtual-dtor -Wopenmp-simd -Woverloaded-virtual -Wpacked                     \
@@ -12,24 +12,26 @@ CXXFLAGS =  -D _DEBUG -ggdb3 -std=c++17 -O0 -Wall -Wextra -Weffc++ -Waggressive-
    -fstack-protector -fstrict-overflow -fno-omit-frame-pointer -Wlarger-than=8192                  \
    -Wstack-usage=8192 -fsanitize=address -fsanitize=undefined -fPIE -Werror=vla
 
-.PHONY: tree
+# .PHONY: tree
 
-tree: tree_test.o tree.o tree_dump.o
-	clang++ tree_test.o tree.o  tree_dump.o -o tree && ./tree
+# tree: tree_test.o tree.o tree_dump.o
+# 	clang++ tree_test.o tree.o  tree_dump.o -o tree && ./tree
 
-tree_test.o: tree_test.cpp tree.h tree_dump.h
-	clang++ -c tree_test.cpp
-tree.o: tree.cpp tree.h
-	clang++ -c tree.cpp
-tree_dump.o: tree_dump.cpp tree.h tree_dump.h
-	clang++ -c tree_dump.cpp
+# tree_test.o: tree_test.cpp tree.h tree_dump.h
+# 	clang++ -c tree_test.cpp
+# tree.o: tree.cpp tree.h
+# 	clang++ -c tree.cpp
+# tree_dump.o: tree_dump.cpp tree.h tree_dump.h
+# 	clang++ -c tree_dump.cpp
 
 
 .PHONY: akinator
-akinator: akinator_test.o akinator_dump.o
-	clang++ akinator_test.o akinator_dump.o $(CXXFLAGS) -o akinator && ./akinator
-
+akinator: akinator_test.o akinator_dump.o stack_func.o
+	clang++ akinator_test.o akinator_dump.o stack_func.o $(CXXFLAGS) -o akinator && ./akinator
 akinator_test.o: akinator_test.cpp akinator.h akinator_dump.h
 	clang++ -c akinator_test.cpp
-akinator_dump.o: akinator_dump.cpp tree.h akinator_dump.h
+akinator_dump.o: akinator_dump.cpp akinator_dump.h
 	clang++ -c akinator_dump.cpp
+
+stack_func.o: stack_func.cpp stack_func.h
+	clang++ -c stack_func.cpp

@@ -22,5 +22,10 @@ struct akinator_tree{
 
 
 akinator_element * question_ctor(char * text, int size);
-int akinator_add_descendant(akinator_element ** ancestor, char * text, int size);
 int akinator_ctor(akinator_tree * tree);
+
+int akinator_add_descendant(akinator_element ** ancestor, char * text, int size);
+
+int read_node_akinator(akinator_element ** node, FILE * pfile, char * text, int size);
+int read_data_akinator(akinator_tree * tree);
+
