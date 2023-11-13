@@ -3,9 +3,6 @@
 
 #include <stdlib.h>  // should be deleted
 #include <string.h>
-#include <cstdio>
-#include <fcntl.h>
-
 
 static void print_grapf_node(akinator_element * element, FILE * pfile, int rank);
 static void print_graph_arrows(akinator_element * element, FILE * pfile);
@@ -44,7 +41,7 @@ int akinator_print_preorder(akinator_element * root) {       // it is like a roo
         return 0;
     }
     printf("(");
-    printf("%s ", root->text);
+    printf("<%s>", root->text);
     akinator_print_preorder(root->left);
     akinator_print_preorder(root->right);
     printf(")");

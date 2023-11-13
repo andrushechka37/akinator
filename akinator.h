@@ -1,6 +1,8 @@
 #pragma once
+
+const int text_len = 100;
 struct akinator_element{
-    char * text;
+    char text[text_len];
     akinator_element * left;
     akinator_element * right;
 };
