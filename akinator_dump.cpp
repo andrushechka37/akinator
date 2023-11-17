@@ -56,8 +56,6 @@ void akinator_visualize(akinator_tree * tree) {
     fprintf(pfile, "\tnode[color=\"black\",fontsize=14];\n");
     fprintf(pfile, "\tedge[color=\"darkgreen\",fontcolor=\"blue\",fontsize=12,  width=0.4];\n\n\n");
 
-    fprintf(pfile, "\t99999 [shape=note,style=filled, fillcolor=\"#fdf39b\", label=\"SIZE: %d\", fontcolor = \"black\", fontsize = 20];\n", tree->size);
-
     print_graph_node(tree->root, pfile, 1);
 
     fprintf(pfile, "\n\n\n\n");

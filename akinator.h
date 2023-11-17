@@ -25,12 +25,12 @@ struct akinator_tree{
 
 
 
-akinator_element * question_ctor(char * text, int size);
+akinator_element * question_ctor(char * text);
 int akinator_ctor(akinator_tree * tree);
 
-int akinator_add_descendant(akinator_element ** ancestor, char * text, int size);
+int akinator_add_descendant(akinator_element ** ancestor, char * text);
 
-int read_node_akinator(akinator_element ** node, FILE * pfile, char * text, int size);
+int read_node_akinator(akinator_element ** node, FILE * pfile, char * text);
 int read_data_akinator(akinator_tree * tree);
 
 int akinator_characterize_node(akinator_element* elem, char * search_text, stack * stk);
@@ -38,3 +38,7 @@ int akinator_characterize_print(akinator_element* elem, char * search_text);
 
 
 int graph_traversal(akinator_element* elem);
+
+void akinator_start(akinator_tree * tree);
+
+int save_data(akinator_element * root, FILE * pfile);
